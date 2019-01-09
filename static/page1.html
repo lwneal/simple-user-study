@@ -1,30 +1,41 @@
 <html>
+<center>
+    <h2>Questions: Part 1</h2>
+
+    <h4>
+        Please inspect the following dogs.
+    </h4>
+
+    <img width=400 src="dog1.jpg"></img>
+    <br>
+    <img width=400 src="dog2.jpg"></img>
+    <br>
+    <br>
+    <br>
+    <br>
+
     <div>
-        <h3>Questions: Part 1</h3>
-
-        <p>
-            Here are some dogs.
-        </p>
-
-        <img width=400 src="dog1.jpg"></img>
         <br>
-        <img width=400 src="dog2.jpg"></img>
-        <br>
-        <img width=400 src="dog3.jpg"></img>
-        <br>
-    </div>
-
-    <div>
-        On a scale of 1 (bad) to 5 (very good), how good are these dogs?
-
         <form action="/submit_page1" method="post">
-            <input type="radio" name="dog_good" value="1"> 1<br>
-            <input type="radio" name="dog_good" value="2"> 2<br>
-            <input type="radio" name="dog_good" value="3"> 3<br>
-            <input type="radio" name="dog_good" value="4"> 4<br>
-            <input type="radio" name="dog_good" value="5"> 5<br>
-            <input type="radio" name="dog_good" value="6"> 6<br>
+            <h4>On a scale of 1 (bad) to 5 (very good), how good are these dogs?</h4>
+            <input type="radio" name="dog_score" value="1"> 1<br>
+            <input type="radio" name="dog_score" value="2"> 2<br>
+            <input type="radio" name="dog_score" value="3"> 3<br>
+            <input type="radio" name="dog_score" value="4"> 4<br>
+            <input type="radio" name="dog_score" value="5"> 5<br>
+            <input type="radio" name="dog_score" value="6"> 6<br>
+
+            <h4>Please indicate which of the following is true (check all that apply)</h4>
+            <input type="checkbox" name="vehicle1" value="Bike"> I have a bike<br>
+            <input type="checkbox" name="vehicle2" value="Car"> I have a car<br>
+            <input type="checkbox" name="vehicle3" value="Boat" checked> I have a boat<br><br>
+
+            <h4>How do you feel today? Please be descriptive.</h4>
+            <input type="text" name="user_comments"><br>
+            <br>
+            <br>
             <input type="submit" value="Submit">
         </form>
     </div>
+</center>
 </html>

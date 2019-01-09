@@ -1,21 +1,47 @@
+import os
+import time
 import flask
 import datetime
+import json
+
+OUTPUT_DIR = 'user_data/'
 
 app = flask.Flask(__name__)
 
+
+def save_data(form_dict):
+    if not os.path.exists(OUTPUT_DIR):
+        os.mkdir(OUTPUT_DIR)
+    milliseconds = int(time.time() * 1000)
+    entry = {
+        'time': milliseconds,
+        'time_readable': datetime.datetime.now().strftime('%D %H:%M:%S'),
+    }
+    for k,v in form_dict.items():
+        entry[k] = v
+
+    filename = os.path.join(OUTPUT_DIR, 'entry_{}.json'.format(milliseconds))
+    content = json.dumps(entry, indent=2) + '\n'
+    with open(filename, 'w') as fp:
+        fp.write(content)
+    print('Saved user response to file {}'.format(filename))
+
+
 @app.route('/')
 def hello():
-    kwargs = {
-        'current_time': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-    }
-    return flask.render_template('index.html', **kwargs)
+    return flask.redirect('static/intro.html')
 
 
 @app.route('/submit_page1', methods=['POST'])
 def submit_page1():
-    # TODO: save the user's input to a file
-    print('Submission from page 1: {}'.format(flask.request.data))
+    save_data(dict(flask.request.form))
     return flask.redirect('static/page2.html')
+
+
+@app.route('/submit_page2', methods=['POST'])
+def submit_page2():
+    save_data(dict(flask.request.form))
+    return flask.redirect('static/complete.html')
 
 
 @app.route('/static/<path:path>')
