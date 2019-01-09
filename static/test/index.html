@@ -119,24 +119,51 @@
         <script src="../src/main/Configurator.js"></script>
         <script src="../src/main/Launcher.js"></script>
 
-        <p>
-            Please take five minutes to play Space Invaders.
-        </p>
-        <div id="javatari" style="text-align: center; margin: 2px auto 0; padding: 0 10px;">
-            <div id="javatari-screen" style="box-shadow: 2px 2px 10px rgba(0, 0, 0, .7);"></div>
-        </div>
+        <center>
+            <h4>Please take five minutes to play Space Invaders.</h4>
+
+            Click the GAME RESET switch to begin.
+
+            <div id="javatari" style="text-align: center; margin: 2px auto 0; padding: 0 10px;">
+                <div id="javatari-screen" style="box-shadow: 2px 2px 10px rgba(0, 0, 0, .7);"></div>
+            </div>
+
+            <h4>You have been playing Space Invaders for:
+            <label id="minutes">00</label>:<label id="seconds">00</label>
+            </h4>
         <p>
             When you are finished playing Space Invaders, <a href="/static/page1.html">click here</a>
         </p>
+        </center>
 
         <script>
-
             Javatari.AUTO_POWER_ON_DELAY = 0;
             //Javatari.WEB_EXTENSIONS_SERVER = "webmsx.herokuapp.com";
             // XAI User study: use Space Invaders
             // Javatari.CARTRIDGE_URL = "roms/Pitfall.bin";
             Javatari.CARTRIDGE_URL = "roms/SpaceInvaders.zip";
+        </script>
 
+    <script>
+var minutesLabel = document.getElementById("minutes");
+var secondsLabel = document.getElementById("seconds");
+var totalSeconds = 0;
+setInterval(setTime, 1000);
+
+function setTime() {
+  ++totalSeconds;
+  secondsLabel.innerHTML = pad(totalSeconds % 60);
+  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+}
+
+function pad(val) {
+  var valString = val + "";
+  if (valString.length < 2) {
+    return "0" + valString;
+  } else {
+    return valString;
+  }
+}
         </script>
 
     </body>
