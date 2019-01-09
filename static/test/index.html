@@ -3,13 +3,10 @@
 
     <head lang="en">
 
-        <!-- DEBUG 4 -->
-        <!--<script src="http://10.42.10.141:9090/target/target-script-min.js#javatari"></script>-->
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width = device-width, user-scalable = yes">
 
-        <title>Javatari Test</title>
+        <title>Space Invaders</title>
         <meta name="description" content="Javatari - The online Atari 2600 emulator">
         <link rel="icon" type="image/png" sizes="192x192" href="../src/runtime/images/files/logo-icon192.png">
 
@@ -122,14 +119,21 @@
         <script src="../src/main/Configurator.js"></script>
         <script src="../src/main/Launcher.js"></script>
 
+        <p>
+            Please take five minutes to play Space Invaders.
+        </p>
         <div id="javatari" style="text-align: center; margin: 2px auto 0; padding: 0 10px;">
             <div id="javatari-screen" style="box-shadow: 2px 2px 10px rgba(0, 0, 0, .7);"></div>
         </div>
+        <p>
+            When you are finished playing Space Invaders, <a href="/static/page1.html">click here</a>
+        </p>
 
         <script>
 
             Javatari.AUTO_POWER_ON_DELAY = 0;
-            Javatari.WEB_EXTENSIONS_SERVER = "webmsx.herokuapp.com";
+            //Javatari.WEB_EXTENSIONS_SERVER = "webmsx.herokuapp.com";
+            // XAI User study: use Space Invaders
             // Javatari.CARTRIDGE_URL = "roms/Pitfall.bin";
             Javatari.CARTRIDGE_URL = "roms/SpaceInvaders.zip";
 
