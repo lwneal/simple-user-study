@@ -9,18 +9,19 @@ OUTPUT_DIR = 'user_data/'
 app = flask.Flask(__name__)
 
 
-def save_data(form_dict):
+def save_request(request):
     if not os.path.exists(OUTPUT_DIR):
         os.mkdir(OUTPUT_DIR)
-    milliseconds = int(time.time() * 1000)
-    entry = {
-        'time': milliseconds,
-        'time_readable': datetime.datetime.now().strftime('%D %H:%M:%S'),
-    }
-    for k,v in form_dict.items():
-        entry[k] = v
 
+    entry = dict(request.form)
+    entry.update(dict(request.args))
+    milliseconds = int(time.time() * 1000)
     filename = os.path.join(OUTPUT_DIR, 'entry_{}.json'.format(milliseconds))
+
+    entry['time'] = milliseconds,
+    entry['time_readable'] = datetime.datetime.now().strftime('%D %H:%M:%S'),
+    entry['endpoint'] = request.url,
+
     content = json.dumps(entry, indent=2) + '\n'
     with open(filename, 'w') as fp:
         fp.write(content)
@@ -34,13 +35,13 @@ def hello():
 
 @app.route('/submit_page1', methods=['POST'])
 def submit_page1():
-    save_data(dict(flask.request.form))
+    save_request(flask.request)
     return flask.redirect('static/page2.html')
 
 
 @app.route('/submit_page2', methods=['POST'])
 def submit_page2():
-    save_data(dict(flask.request.form))
+    save_request(flask.request)
     return flask.redirect('static/complete.html')
 
 
