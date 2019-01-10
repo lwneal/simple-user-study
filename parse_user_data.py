@@ -7,6 +7,7 @@ OUTPUT_FILENAME = 'collected_data.csv'
 
 # Collect all endpoints per user_id
 entries = {}
+print('Reading user data from {}'.format(INPUT_DATA_DIR))
 for filename in sorted(os.listdir(INPUT_DATA_DIR)):
     data = json.loads(open(os.path.join(INPUT_DATA_DIR, filename)).read())
     user_id = data['user_id']
@@ -16,5 +17,6 @@ for filename in sorted(os.listdir(INPUT_DATA_DIR)):
 
 
 # Convert to a CSV file
+print('Writing user data to CSV file: {}'.format(OUTPUT_FILENAME))
 data_rows = [i for i in entries.values()]
 pd.DataFrame(data_rows).to_csv(OUTPUT_FILENAME)
