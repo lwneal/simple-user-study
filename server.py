@@ -13,14 +13,18 @@ def save_request(request):
     if not os.path.exists(OUTPUT_DIR):
         os.mkdir(OUTPUT_DIR)
 
-    entry = dict(request.form)
-    entry.update(dict(request.args))
+    entry = {}
+    for k, v in request.form.items():
+        entry[k] = v[0] if type(v) is list else v
+    for k, v in request.args.items():
+        entry[k] = v[0] if type(v) is list else v
+
     milliseconds = int(time.time() * 1000)
     filename = os.path.join(OUTPUT_DIR, 'entry_{}.json'.format(milliseconds))
 
-    entry['time'] = milliseconds,
-    entry['time_readable'] = datetime.datetime.now().strftime('%D %H:%M:%S'),
-    entry['endpoint'] = request.url,
+    entry['time'] = milliseconds
+    entry['time_readable'] = datetime.datetime.now().strftime('%D %H:%M:%S')
+    entry['endpoint'] = request.url
 
     content = json.dumps(entry, indent=2) + '\n'
     with open(filename, 'w') as fp:
@@ -36,7 +40,7 @@ def hello():
 @app.route('/submit_page1', methods=['POST'])
 def submit_page1():
     save_request(flask.request)
-    user_id = flask.request.args.get('user_id')
+    user_id = flask.request.form.get('user_id')
     return flask.redirect('static/page2.html?user_id={}'.format(user_id))
 
 
@@ -52,4 +56,4 @@ def serve_static(path):
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=8080, debug=True)
+    app.run('0.0.0.0', port=8000)
