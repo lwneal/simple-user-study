@@ -22,8 +22,15 @@
             <input type="radio" name="dog_good" value="4"> 4<br>
             <input type="radio" name="dog_good" value="5"> 5<br>
             <input type="radio" name="dog_good" value="6"> 6<br>
+
+            <input id="user_id" type="text" name="user_id" hidden=true>
             <input type="submit" value="Submit">
         </form>
     </div>
     </center>
+<script>
+var urlParams = new URLSearchParams(window.location.search);
+var userId = urlParams.get('user_id');
+document.getElementById("user_id").value = urlParams.get('user_id');
+</script>
 </html>

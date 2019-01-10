@@ -36,7 +36,8 @@ def hello():
 @app.route('/submit_page1', methods=['POST'])
 def submit_page1():
     save_request(flask.request)
-    return flask.redirect('static/page2.html')
+    user_id = flask.request.args.get('user_id')
+    return flask.redirect('static/page2.html?user_id={}'.format(user_id))
 
 
 @app.route('/submit_page2', methods=['POST'])
@@ -48,6 +49,7 @@ def submit_page2():
 @app.route('/static/<path:path>')
 def serve_static(path):
     return flask.send_from_directory('static', path)
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=8080, debug=True)

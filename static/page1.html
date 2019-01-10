@@ -16,7 +16,7 @@
 
     <div>
         <br>
-        <form action="/submit_page1" method="post">
+        <form id="myform" action="/submit_page1" method="post">
             <h4>On a scale of 1 (bad) to 5 (very good), how good are these dogs?</h4>
             <input type="radio" name="dog_score" value="1"> 1<br>
             <input type="radio" name="dog_score" value="2"> 2<br>
@@ -34,8 +34,14 @@
             <textarea rows=10 cols=80 name="user_comments"></textarea>
             <br>
             <br>
+            <input id="user_id" type="text" hidden=true name="user_id">
             <input type="submit" value="Submit">
         </form>
     </div>
 </center>
+<script>
+var urlParams = new URLSearchParams(window.location.search);
+var userId = urlParams.get('user_id');
+document.getElementById("user_id").value = urlParams.get('user_id');
+</script>
 </html>

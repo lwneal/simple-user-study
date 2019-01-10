@@ -131,9 +131,13 @@
             <h4>You have been playing Space Invaders for:
             <label id="minutes">00</label>:<label id="seconds">00</label>
             </h4>
-        <p>
-            When you are finished playing Space Invaders, <a href="/static/page1.html">click here</a>
-        </p>
+
+            When you are finished playing Space Invaders, click the button below to continue.
+            <form action="/static/page1.html">
+                <input id="user_id" type="text" name="user_id" hidden=true>
+                <input type="submit" value="Continue">
+            </form>
+
         </center>
 
         <script>
@@ -144,7 +148,7 @@
             Javatari.CARTRIDGE_URL = "roms/SpaceInvaders.zip";
         </script>
 
-    <script>
+<script>
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
 var totalSeconds = 0;
@@ -164,7 +168,13 @@ function pad(val) {
     return valString;
   }
 }
-        </script>
+</script>
+
+<script>
+var urlParams = new URLSearchParams(window.location.search);
+var userId = urlParams.get('user_id');
+document.getElementById("user_id").value = urlParams.get('user_id');
+</script>
 
     </body>
 
