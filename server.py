@@ -22,8 +22,7 @@ def save_request(request):
     milliseconds = int(time.time() * 1000)
     filename = os.path.join(OUTPUT_DIR, 'entry_{}.json'.format(milliseconds))
 
-    entry['time'] = milliseconds
-    entry['time_readable'] = datetime.datetime.now().strftime('%D %H:%M:%S')
+    entry['timestamp'] = milliseconds
     entry['endpoint'] = request.url
 
     content = json.dumps(entry, indent=2) + '\n'
@@ -46,6 +45,13 @@ def submit_page1():
 
 @app.route('/submit_page2', methods=['POST'])
 def submit_page2():
+    save_request(flask.request)
+    user_id = flask.request.form.get('user_id')
+    return flask.redirect('static/page3.html?user_id={}'.format(user_id))
+
+
+@app.route('/submit_page3', methods=['POST'])
+def submit_page3():
     save_request(flask.request)
     return flask.redirect('static/complete.html')
 
