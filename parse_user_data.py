@@ -9,7 +9,10 @@ OUTPUT_FILENAME = 'collected_data.csv'
 entries = {}
 print('Reading user data from {}'.format(INPUT_DATA_DIR))
 for filename in sorted(os.listdir(INPUT_DATA_DIR)):
-    data = json.loads(open(os.path.join(INPUT_DATA_DIR, filename)).read())
+    if not filename.endswith('.json'):
+        continue
+    text = open(os.path.join(INPUT_DATA_DIR, filename)).read()
+    data = json.loads(text)
     user_id = data['user_id']
     if user_id not in entries:
         entries[user_id] = {}
